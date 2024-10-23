@@ -1,0 +1,34 @@
+import random
+import time
+
+class HydraulicPump:
+    def __init__(self):
+        self.pressure = random.uniform(10, 90)
+
+    def increase_pressure(self):
+        self.pressure += random.uniform(1, 5)
+
+    def decrease_pressure(self):
+        self.pressure -= random.uniform(1, 5)
+
+    def check_pressure(self):
+        return self.pressure
+
+def control_system(pump):
+    while True:
+        current_pressure = pump.check_pressure()
+        print(f"Current pressure: {current_pressure:.2f}")
+        
+        if current_pressure < 20:
+            print("Pressure too low, increasing pressure...")
+            pump.increase_pressure()
+        elif current_pressure > 80:
+            print("Pressure too high, decreasing pressure...")
+            pump.decrease_pressure()
+        else:
+            print("Pressure is stable.")
+
+        time.sleep(1)
+
+pump = HydraulicPump()
+control_system(pump)
