@@ -1,0 +1,11 @@
+import random
+
+sensor_data = [random.uniform(15, 100) for _ in range(100)]
+
+split_index = int(0.6 * len(sensor_data))
+
+training_set = sensor_data[:split_index]
+test_set = sensor_data[split_index:]
+
+print(f"Training set (60%): {len(training_set)} readings")
+print(f"Test set (40%): {len(test_set)} readings")
