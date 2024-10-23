@@ -1,0 +1,19 @@
+temperatures = []
+
+while True:
+    temp_input = input("Enter temperature (or 'done' to finish): ")
+    
+    if temp_input.lower() == 'done':
+        break
+    
+    try:
+        temp = float(temp_input)
+        temperatures.append(temp)
+    except ValueError:
+        print("Invalid input. Please enter a numeric value or 'done'.")
+
+if temperatures:
+    avg_temperature = sum(temperatures) / len(temperatures)
+    print(f"The average temperature is: {avg_temperature:.2f}°C")
+else:
+    print("No temperatures were entered.")
