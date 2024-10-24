@@ -1,0 +1,24 @@
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+
+# Sample data: [feature1, feature2] and their corresponding labels
+data = np.array([
+    [3.0, 2.5],  # Machine 1
+    [2.5, 2.0],  # Machine 2
+    [3.5, 3.0],  # Machine 3
+    [8.0, 8.5],  # Machine 4
+    [8.5, 8.0],  # Machine 5
+])
+labels = np.array([0, 0, 0, 1, 1])  # 0 for Category A, 1 for Category B
+
+# New machine to classify
+new_machine = np.array([[3.2, 2.8]])
+
+# Create KNN classifier
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(data, labels)
+
+# Predict the class of the new machine
+prediction = knn.predict(new_machine)
+
+print(f"The new machine is classified as: {prediction[0]}")
