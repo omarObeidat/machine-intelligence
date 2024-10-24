@@ -1,0 +1,27 @@
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+data = np.array([
+    [85, 90], [60, 55], [78, 80], [95, 95], [50, 45], 
+    [40, 35], [85, 60], [65, 70], [92, 85], [30, 20]
+])
+
+labels = np.array([2, 1, 1, 2, 0, 0, 1, 1, 2, 0])
+
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.4, random_state=42)
+
+classifier = DecisionTreeClassifier()
+classifier.fit(X_train, y_train)
+
+y_pred = classifier.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+
+print(f"Accuracy: {accuracy:.2f}")
+
+new_student = np.array([[70, 75]])
+prediction = classifier.predict(new_student)
+
+categories = {0: "Fail", 1: "Pass", 2: "High Achiever"}
+print(f"Prediction for new student: {categories[prediction[0]]}")
