@@ -1,0 +1,35 @@
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# Sample data: [HW_score, exam_score]
+data = np.array([
+    [85, 90], [60, 55], [78, 80], [95, 95], [50, 45], 
+    [40, 35], [85, 60], [65, 70], [92, 85], [30, 20]
+])
+
+# Labels: 0 for Fail, 1 for Pass, 2 for High Achiever
+labels = np.array([2, 1, 1, 2, 0, 0, 1, 1, 2, 0])
+
+# Creating a new feature: Performance Index (weighted average of HW and exam scores)
+performance_index = (0.4 * data[:, 0]) + (0.6 * data[:, 1])  # Weighted more on exam scores
+
+# Combine the Performance Index with the original data
+data_with_performance_index = np.column_stack((data, performance_index))
+
+X_train, X_test, y_train, y_test = train_test_split(data_with_performance_index, labels, test_size=0.4, random_state=42)
+
+classifier = DecisionTreeClassifier()
+classifier.fit(X_train, y_train)
+
+y_pred = classifier.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+
+print(f"Accuracy: {accuracy:.2f}")
+
+new_student = np.array([[70, 75, (0.4 * 70 + 0.6 * 75)]])  # Example new student
+prediction = classifier.predict(new_student)
+
+categories = {0: "Fail", 1: "Pass", 2: "High Achiever"}
+print(f"Prediction for new student: {categories[prediction[0]]}")
