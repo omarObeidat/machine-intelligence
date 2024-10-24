@@ -1,0 +1,11 @@
+def classify_failure(temp, pressure):
+    if temp > 75 or pressure > 120:
+        result = "Failure"
+    else:
+        result = "No Failure"
+    print(f"The machine's status is: {result}")
+
+# Test with a new machine reading
+temperature = 80
+pressure = 100
+classify_failure(temperature, pressure)
