@@ -1,0 +1,33 @@
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Historical usage data (e.g., in hours per week)
+weeks = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])  # Weeks
+usage = np.array([5, 6, 7, 8, 9, 12, 15, 16, 18, 20])  # Usage in hours per week
+
+# Reshape the data for training
+weeks = weeks.reshape(-1, 1)
+
+# Train a linear regression model
+X_train, X_test, y_train, y_test = train_test_split(weeks, usage, test_size=0.2, random_state=42)
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predict usage for next week (week 11)
+next_week = np.array([[11]])
+predicted_usage = model.predict(next_week)
+
+# Output predicted usage for next week
+print(f"Predicted ChatGPT usage for next week (week 11): {predicted_usage[0]:.2f} hours")
+
+# Plot the regression line and data
+plt.scatter(weeks, usage, color='blue', label='Historical Usage')
+plt.plot(weeks, model.predict(weeks), color='red', label='Regression Line')
+plt.scatter(next_week, predicted_usage, color='green', label='Next Week Prediction', marker='x')
+plt.xlabel('Week')
+plt.ylabel('Usage (hours)')
+plt.title('ChatGPT Usage Prediction')
+plt.legend()
+plt.show()
