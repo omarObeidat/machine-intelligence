@@ -1,0 +1,16 @@
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+
+# Sample sensor data from different machines (with different scales)
+sensor_data = np.array([
+    [300, 45, 0.8],  # Machine 1
+    [600, 20, 0.5],  # Machine 2
+    [150, 75, 0.9],  # Machine 3
+    [900, 50, 0.7],  # Machine 4
+])
+
+scaler = MinMaxScaler()
+
+normalized_data = scaler.fit_transform(sensor_data)
+
+print(normalized_data)
